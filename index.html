@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>م. محمد حربي أبو المجد | بطاقة أعمال رقمية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--bg:#070b16;--bg2:#0d1630;--gold:#d4af37;--gold2:#f3d98b;--text:#f4efe1;--muted:#a9b0c3;--glass:rgba(255,255,255,.05);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;font-family:'Cairo','Segoe UI',Tahoma,sans-serif;color:var(--text);background:radial-gradient(120% 70% at 50% 0%,var(--bg2),var(--bg) 70%);display:flex;justify-content:center}
+.card{width:100%;max-width:440px;padding:36px 22px 40px;text-align:center}
+.avatar{width:136px;height:136px;margin:0 auto 18px;border-radius:50%;padding:4px;background:conic-gradient(var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 6px rgba(212,175,55,.12),0 0 38px rgba(212,175,55,.45);cursor:pointer;position:relative;animation:glow 3.2s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 0 10px rgba(212,175,55,.08),0 0 56px rgba(212,175,55,.65)}}
+.avatar .in{width:100%;height:100%;border-radius:50%;background:#0b1226 center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;color:var(--gold2)}
+h1{margin:0;font-size:25px;font-weight:800;background:linear-gradient(90deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.title{margin:6px 0 0;color:var(--gold2);font-weight:600;font-size:15px}
+.bio{margin:14px auto 0;max-width:330px;color:var(--muted);font-size:14px;line-height:1.9}
+.line{height:1px;margin:24px auto;width:70%;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.save{width:100%;border:0;border-radius:16px;padding:16px;font:800 17px 'Cairo',sans-serif;color:#1a1403;background:linear-gradient(135deg,var(--gold2),var(--gold) 55%,#b8901f);box-shadow:0 10px 28px rgba(212,175,55,.3);cursor:pointer}
+.save:active{transform:scale(.98)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 8px;border-radius:14px;color:var(--text);text-decoration:none;font:600 14px 'Cairo',sans-serif;background:var(--glass);border:1px solid rgba(212,175,55,.35);backdrop-filter:blur(8px);cursor:pointer}
+.btn:active{background:rgba(212,175,55,.15)}
+.btn svg{width:19px;height:19px;fill:var(--gold2);flex:none}
+.social{display:flex;justify-content:center;gap:14px;margin-top:22px}
+.social a{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,175,55,.4);background:var(--glass)}
+.social svg{width:21px;height:21px;fill:var(--gold2)}
+.qrbtn{margin-top:18px;width:100%}
+.foot{margin-top:26px;font-size:12px;color:#6f778c}
+.modal{position:fixed;inset:0;background:rgba(3,5,12,.82);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.on{display:flex}
+.sheet{width:100%;max-width:340px;background:linear-gradient(160deg,#111a38,#0a0f21);border:1px solid var(--gold);border-radius:22px;padding:24px;text-align:center;box-shadow:0 0 50px rgba(212,175,55,.25)}
+.sheet h2{margin:0 0 14px;font-size:17px;color:var(--gold2)}
+#qr{background:#fff;padding:14px;border-radius:14px;display:inline-block;line-height:0}
+.sheet p{color:var(--muted);font-size:13px;margin:12px 0 0;line-height:1.7}
+.sheet textarea{width:100%;height:150px;direction:ltr;background:#070b16;color:var(--text);border:1px solid rgba(212,175,55,.4);border-radius:10px;padding:8px;font-size:12px}
+.close{margin-top:14px;background:none;border:1px solid var(--gold);color:var(--gold2);border-radius:12px;padding:9px 26px;font:600 14px 'Cairo',sans-serif;cursor:pointer}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="avatar" id="avatar" title="اضغط لتغيير الصورة"><div class="in" id="avatarIn">م ح</div></div>
+  <input type="file" id="file" accept="image/*" hidden>
+  <h1>م. محمد حربي أبو المجد</h1>
+  <p class="title">عضو مجلس إدارة نقابة المهندسين بالإسماعيلية</p>
+  <p class="bio">مهندس يؤمن بأن التميّز المهني يبدأ بالالتزام والإتقان.<br>أعمل على خدمة الزملاء المهندسين ودعم الارتقاء بالمهنة.</p>
+  <div class="line"></div>
+
+  <button class="save" id="saveBtn">➕ احفظ رقمي في هاتفك</button>
+
+  <div class="grid">
+    <a class="btn" id="call" href="#"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.250.2 2.450.6 3.600a1 1 0 0 1-.25 1z"/></svg>اتصال مباشر</a>
+    <a class="btn" id="wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7a11 11 0 0 1-4.600-4c-.4-.5-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.5-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .5l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.200 1 2.100 1.300 2.400 1.500.3.100.5.100.6-.1l.9-1.100c.2-.2.4-.2.6-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.200z"/></svg>واتساب</a>
+    <a class="btn" id="map" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.200 7 13 7 13s7-7.800 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z"/></svg>موقع المكتب</a>
+    <a class="btn" id="mail" href="#"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 7 8-5H4l8 5zm0 2L4 8v10h16V8l-8 5z"/></svg>البريد الإلكتروني</a>
+  </div>
+
+  <div class="social">
+    <a id="fb" href="#" target="_blank" rel="noopener" aria-label="فيسبوك"><svg viewBox="0 0 24 24"><path d="M14 8V6.500c0-.7.200-1.100 1.200-1.100H17V2.200C16.700 2.100 15.700 2 14.600 2 12.100 2 10.500 3.500 10.500 6.200V8H8v3.500h2.500V22H14V11.500h2.800L17.300 8z"/></svg></a>
+    <a id="li" href="#" target="_blank" rel="noopener" aria-label="لينكدإن"><svg viewBox="0 0 24 24"><path d="M4.500 8.500h3V20h-3zM6 3.500A1.800 1.800 0 1 1 6 7a1.800 1.800 0 0 1 0-3.500zM10 8.500h2.800v1.600c.5-.9 1.600-1.900 3.400-1.900 3.500 0 4.100 2.300 4.100 5.300V20h-3v-5.700c0-1.400 0-3.100-1.900-3.100s-2.200 1.500-2.200 3V20h-3z"/></svg></a>
+    <a id="ig" href="#" target="_blank" rel="noopener" aria-label="إنستغرام"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.500a4.500 4.500 0 1 1 0 9 4.500 4.500 0 0 1 0-9zm0 2a2.500 2.500 0 1 0 0 5 2.500 2.500 0 0 0 0-5zM17.500 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></a>
+  </div>
+
+  <button class="btn qrbtn" id="qrBtn">▦ كود المسح السريع (QR)</button>
+  <div class="foot">بطاقة أعمال رقمية • نقابة المهندسين بالإسماعيلية</div>
+</main>
+
+<div class="modal" id="qrModal"><div class="sheet">
+  <h2>امسح الكود لفتح البطاقة</h2>
+  <div id="qr"></div>
+  <p>وجّه كاميرا هاتفك نحو الكود لحفظ بطاقتي ومشاركتها.</p>
+  <button class="close" data-close>إغلاق</button>
+</div></div>
+
+<div class="modal" id="ctModal"><div class="sheet">
+  <h2 id="ctTitle"></h2>
+  <p id="ctVal" style="direction:ltr;font-size:20px;color:var(--text);font-weight:600"></p>
+  <p>اضغط نسخ، أو افتح البطاقة من رابطها على الموبايل ليعمل الزر مباشرة.</p>
+  <button class="close" id="ctCopy">نسخ</button>
+  <button class="close" data-close>إغلاق</button>
+</div></div>
+
+<div class="modal" id="vcModal"><div class="sheet">
+  <h2>انسخ بيانات جهة الاتصال</h2>
+  <textarea id="vcText" readonly></textarea>
+  <p>التحميل المباشر غير متاح داخل هذه النافذة. انسخ النص واحفظه بامتداد .vcf، أو افتح البطاقة من رابطها على الهاتف.</p>
+  <button class="close" id="copyVc">نسخ</button>
+  <button class="close" data-close>إغلاق</button>
+</div></div>
+
+<script>
+/* ===== عدّل بياناتك هنا ===== */
+const CARD = {
+  first: 'محمد', last: 'حربي أبو المجد', prefix: 'م.',
+  title: 'عضو مجلس إدارة نقابة المهندسين بالإسماعيلية',
+  org: 'نقابة المهندسين - الإسماعيلية',
+  phone: '+201205769340',
+  email: 'e.harby2@gmail.com',
+  mapUrl: 'https://maps.app.goo.gl/MwqYpw1HzUME2PeBA',
+  facebook: 'https://www.facebook.com/share/19keNvXrNS/',
+  linkedin: '',
+  instagram: '',
+  cardUrl: '' /* اتركه فارغاً ليستخدم رابط الصفحة الحالي */
+};
+/* ============================ */
+const $ = id => document.getElementById(id);
+const digits = CARD.phone.replace(/\D/g, '');
+$('call').href = 'tel:' + CARD.phone;
+$('wa').href = 'https://wa.me/' + digits;
+$('map').href = CARD.mapUrl;
+$('mail').href = 'mailto:' + CARD.email;
+[['fb','facebook'],['li','linkedin'],['ig','instagram']].forEach(([id,k]) => { if (CARD[k]) $(id).href = CARD[k]; else $(id).style.display = 'none'; });
+
+/* صورة شخصية: اضغط على الدائرة لاختيار صورة */
+$('avatar').onclick = () => $('file').click();
+$('file').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { const el = $('avatarIn'); el.style.backgroundImage = 'url(' + r.result + ')'; el.textContent = ''; };
+  r.readAsDataURL(f);
+};
+
+/* vCard */
+function buildVcf() {
+  return ['BEGIN:VCARD', 'VERSION:3.0',
+    'N:' + CARD.last + ';' + CARD.first + ';;' + CARD.prefix + ';',
+    'FN:' + CARD.prefix + ' ' + CARD.first + ' ' + CARD.last,
+    'ORG:' + CARD.org, 'TITLE:' + CARD.title,
+    'TEL;TYPE=CELL,VOICE:' + CARD.phone,
+    'EMAIL;TYPE=INTERNET:' + CARD.email,
+    'END:VCARD'].join('\r\n');
+}
+function openModal(id) { $(id).classList.add('on'); }
+document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => b.closest('.modal').classList.remove('on'));
+document.querySelectorAll('.modal').forEach(m => m.onclick = e => { if (e.target === m) m.classList.remove('on'); });
+
+$('saveBtn').onclick = async () => {
+  const vcf = buildVcf(), name = 'Mohamed-Harby.vcf';
+  if (window.claude && window.claude.use) { /* نافذة Claude: التنزيل المباشر معطّل */
+    try {
+      const dl = await window.claude.use('downloads');
+      if (dl) { await dl.save({ filename: name, data: vcf }); return; }
+    } catch (err) { if (err && err.code === 'declined') return; }
+    $('vcText').value = vcf; openModal('vcModal'); return;
+  }
+  const url = URL.createObjectURL(new Blob([vcf], { type: 'text/vcard;charset=utf-8' }));
+  const a = document.createElement('a'); a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+};
+$('copyVc').onclick = async () => {
+  try { await navigator.clipboard.writeText($('vcText').value); $('copyVc').textContent = 'تم النسخ ✓'; }
+  catch (e) { $('vcText').select(); document.execCommand && document.execCommand('copy'); }
+};
+
+/* اتصال/بريد: داخل نافذة Claude الروابط المباشرة محجوبة، فنعرض الرقم للنسخ */
+let ctText = '';
+[['call', 'اتصال مباشر', CARD.phone.replace('+20', '0')], ['mail', 'البريد الإلكتروني', CARD.email]].forEach(([id, t, v]) => {
+  $(id).addEventListener('click', e => {
+    if (!(window.claude && window.claude.use)) return;
+    e.preventDefault(); ctText = v;
+    $('ctTitle').textContent = t; $('ctVal').textContent = v; $('ctCopy').textContent = 'نسخ';
+    openModal('ctModal');
+  });
+});
+$('ctCopy').onclick = async () => {
+  try { await navigator.clipboard.writeText(ctText); $('ctCopy').textContent = 'تم النسخ ✓'; } catch (e) { $('ctCopy').textContent = ctText; }
+};
+
+/* QR */
+let qrMade = false;
+$('qrBtn').onclick = () => {
+  openModal('qrModal');
+  if (qrMade) return;
+  try {
+    new QRCode($('qr'), { text: CARD.cardUrl || location.href, width: 220, height: 220, colorDark: '#0a0f21', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+    qrMade = true;
+  } catch (e) { $('qr').textContent = 'تعذّر إنشاء الكود'; }
+};
+</script>
+</body>
+</html>
