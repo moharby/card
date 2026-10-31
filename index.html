@@ -24,11 +24,18 @@ h1{margin:0;font-size:25px;font-weight:800;background:linear-gradient(90deg,var(
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 8px;border-radius:14px;color:var(--text);text-decoration:none;font:600 14px 'Cairo',sans-serif;background:var(--glass);border:1px solid rgba(212,175,55,.35);backdrop-filter:blur(8px);cursor:pointer}
 .btn:active{background:rgba(212,175,55,.15)}
+#mail{grid-column:span 2}
 .btn svg{width:19px;height:19px;fill:var(--gold2);flex:none}
 .social{display:flex;justify-content:center;gap:14px;margin-top:22px}
 .social a{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,175,55,.4);background:var(--glass)}
 .social svg{width:21px;height:21px;fill:var(--gold2)}
 .qrbtn{margin-top:18px;width:100%}
+#payBox{display:none;margin-top:12px;text-align:right}
+#payBox.on{display:block}
+.pay{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;margin-top:10px;border-radius:14px;background:var(--glass);border:1px solid rgba(212,175,55,.35)}
+.pay b{display:block;color:var(--gold2);font-size:14px}
+.pay span{direction:ltr;display:inline-block;font-size:17px;letter-spacing:.5px}
+.pay button{border:1px solid var(--gold);background:none;color:var(--gold2);border-radius:10px;padding:8px 14px;font:600 13px 'Cairo',sans-serif;cursor:pointer}
 .foot{margin-top:26px;font-size:12px;color:#6f778c}
 .modal{position:fixed;inset:0;background:rgba(3,5,12,.82);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
 .modal.on{display:flex}
@@ -53,7 +60,8 @@ h1{margin:0;font-size:25px;font-weight:800;background:linear-gradient(90deg,var(
   <button class="save" id="saveBtn">➕ احفظ رقمي في هاتفك</button>
 
   <div class="grid">
-    <a class="btn" id="call" href="#"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.250.2 2.450.6 3.600a1 1 0 0 1-.25 1z"/></svg>اتصال مباشر</a>
+    <a class="btn" id="call" href="#"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.250.2 2.450.6 3.600a1 1 0 0 1-.25 1z"/></svg>الرقم الرئيسي</a>
+    <a class="btn" id="call2" href="#"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.250.2 2.450.6 3.600a1 1 0 0 1-.25 1z"/></svg>رقم العمل</a>
     <a class="btn" id="wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7a11 11 0 0 1-4.600-4c-.4-.5-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.5-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .5l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.200 1 2.100 1.300 2.400 1.500.3.100.5.100.6-.1l.9-1.100c.2-.2.4-.2.6-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.200z"/></svg>واتساب</a>
     <a class="btn" id="map" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.200 7 13 7 13s7-7.800 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z"/></svg>موقع المكتب</a>
     <a class="btn" id="mail" href="#"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 7 8-5H4l8 5zm0 2L4 8v10h16V8l-8 5z"/></svg>البريد الإلكتروني</a>
@@ -65,7 +73,10 @@ h1{margin:0;font-size:25px;font-weight:800;background:linear-gradient(90deg,var(
     <a id="ig" href="#" target="_blank" rel="noopener" aria-label="إنستغرام"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.500a4.500 4.500 0 1 1 0 9 4.500 4.500 0 0 1 0-9zm0 2a2.500 2.500 0 1 0 0 5 2.500 2.500 0 0 0 0-5zM17.500 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></a>
   </div>
 
-  <button class="btn qrbtn" id="qrBtn">▦ كود المسح السريع (QR)</button>
+  <button class="btn qrbtn" id="payBtn">💳 وسائل الدفع الإلكتروني</button>
+  <div id="payBox"></div>
+
+  <button class="btn qrbtn" id="qrBtn" style="margin-top:12px">▦ كود المسح السريع (QR)</button>
   <div class="foot">بطاقة أعمال رقمية • نقابة المهندسين بالإسماعيلية</div>
 </main>
 
@@ -99,6 +110,7 @@ const CARD = {
   title: 'مدير فني - شركة المقاولون العرب | عضو مجلس إدارة نقابة المهندسين بالإسماعيلية',
   org: 'شركة المقاولون العرب',
   phone: '+201205769340',
+  phone2: '+201091878303',
   email: 'e.harby2@gmail.com',
   mapUrl: 'https://maps.app.goo.gl/MwqYpw1HzUME2PeBA',
   facebook: 'https://www.facebook.com/share/19keNvXrNS/',
@@ -110,6 +122,7 @@ const CARD = {
 const $ = id => document.getElementById(id);
 const digits = CARD.phone.replace(/\D/g, '');
 $('call').href = 'tel:' + CARD.phone;
+$('call2').href = 'tel:' + CARD.phone2;
 $('wa').href = 'https://wa.me/' + digits;
 $('map').href = CARD.mapUrl;
 $('mail').href = 'mailto:' + CARD.email;
@@ -131,6 +144,7 @@ function buildVcf() {
     'FN:' + CARD.prefix + ' ' + CARD.first + ' ' + CARD.last,
     'ORG:' + CARD.org, 'TITLE:' + CARD.title,
     'TEL;TYPE=CELL,VOICE:' + CARD.phone,
+    'TEL;TYPE=WORK,VOICE:' + CARD.phone2,
     'EMAIL;TYPE=INTERNET:' + CARD.email,
     'END:VCARD'].join('\r\n');
 }
@@ -159,17 +173,37 @@ $('copyVc').onclick = async () => {
 
 /* اتصال/بريد: داخل نافذة Claude الروابط المباشرة محجوبة، فنعرض الرقم للنسخ */
 let ctText = '';
-[['call', 'اتصال مباشر', CARD.phone.replace('+20', '0')], ['mail', 'البريد الإلكتروني', CARD.email]].forEach(([id, t, v]) => {
+[['call', 'الرقم الرئيسي', CARD.phone.replace('+20', '0')], ['call2', 'رقم العمل', CARD.phone2.replace('+20', '0')], ['mail', 'البريد الإلكتروني', CARD.email]].forEach(([id, t, v]) => {
   $(id).addEventListener('click', e => {
-    if (!(window.claude && window.claude.use)) return;
-    e.preventDefault(); ctText = v;
+    ctText = v;
     $('ctTitle').textContent = t; $('ctVal').textContent = v; $('ctCopy').textContent = 'نسخ';
-    openModal('ctModal');
+    if (window.claude && window.claude.use) { e.preventDefault(); openModal('ctModal'); return; }
+    /* لو الجهاز/المتصفح ماقدرش يفتح الاتصال أو البريد، نعرض الرقم للنسخ */
+    setTimeout(() => { if (!document.hidden) openModal('ctModal'); }, 1500);
   });
 });
 $('ctCopy').onclick = async () => {
   try { await navigator.clipboard.writeText(ctText); $('ctCopy').textContent = 'تم النسخ ✓'; } catch (e) { $('ctCopy').textContent = ctText; }
 };
+
+/* وسائل الدفع: عدّل البيانات هنا */
+const PAY = [
+  { ar: 'إنستاباي', en: 'InstaPay', num: 'mo.harby85@instapay', url: 'https://ipn.eg/S/mo.harby85/instapay/4dkem3', badge: '#6a2c91' },
+  { ar: 'أورنج كاش', en: 'Orange Cash', num: CARD.phone.replace('+20', '0'), badge: '#ff7900' }
+];
+async function copyText(t) {
+  try { await navigator.clipboard.writeText(t); }
+  catch (e) { const x = document.createElement('textarea'); x.value = t; document.body.appendChild(x); x.select(); try { document.execCommand('copy'); } catch (_) {} x.remove(); }
+}
+PAY.forEach(p => {
+  const d = document.createElement('div'); d.className = 'pay'; d.style.flexWrap = 'wrap';
+  d.innerHTML = '<div><b>' + p.ar + ' <small style="background:' + p.badge + ';color:#fff;border-radius:8px;padding:1px 8px;font-weight:600;margin-right:4px">' + p.en + '</small></b><span>' + p.num + '</span></div><button type="button">نسخ</button>'
+    + (p.url ? '<a class="btn" style="width:100%;margin-top:6px;background:' + p.badge + ';border-color:' + p.badge + ';color:#fff" href="' + p.url + '" target="_blank" rel="noopener">💸 ادفع عبر ' + p.ar + '</a>' : '');
+  const btn = d.querySelector('button');
+  btn.onclick = async () => { await copyText(p.num); btn.textContent = 'تم النسخ ✓'; setTimeout(() => btn.textContent = 'نسخ', 1800); };
+  $('payBox').appendChild(d);
+});
+$('payBtn').onclick = () => $('payBox').classList.toggle('on');
 
 /* QR */
 let qrMade = false;
