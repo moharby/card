@@ -26,9 +26,14 @@ h1{margin:0;font-size:25px;font-weight:800;background:linear-gradient(90deg,var(
 .btn:active{background:rgba(212,175,55,.15)}
 #mail{grid-column:span 2}
 .btn svg{width:19px;height:19px;fill:var(--gold2);flex:none}
-.social{display:flex;justify-content:center;gap:14px;margin-top:22px}
-.social a{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,175,55,.4);background:var(--glass)}
-.social svg{width:21px;height:21px;fill:var(--gold2)}
+.social{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.soc{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;text-decoration:none;color:var(--text);background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid rgba(212,175,55,.35);backdrop-filter:blur(8px);font:600 14px 'Cairo',sans-serif;transition:transform .2s}
+.soc:active{transform:scale(.97)}
+.soc i{flex:none;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.soc i svg{width:22px;height:22px;fill:#fff}
+.soc span{display:block;line-height:1.3;text-align:right}
+.soc small{display:block;color:var(--muted);font-weight:400;font-size:11px}
+.soc.one{grid-column:span 2;justify-content:center}
 .qrbtn{margin-top:18px;width:100%}
 #payBox{display:none;margin-top:12px;text-align:right}
 #payBox.on{display:block}
@@ -67,11 +72,7 @@ h1{margin:0;font-size:25px;font-weight:800;background:linear-gradient(90deg,var(
     <a class="btn" id="mail" href="#"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 7 8-5H4l8 5zm0 2L4 8v10h16V8l-8 5z"/></svg>البريد الإلكتروني</a>
   </div>
 
-  <div class="social">
-    <a id="fb" href="#" target="_blank" rel="noopener" aria-label="فيسبوك"><svg viewBox="0 0 24 24"><path d="M14 8V6.500c0-.7.200-1.100 1.200-1.100H17V2.200C16.700 2.100 15.700 2 14.600 2 12.100 2 10.500 3.500 10.500 6.200V8H8v3.500h2.500V22H14V11.500h2.800L17.300 8z"/></svg></a>
-    <a id="li" href="#" target="_blank" rel="noopener" aria-label="لينكدإن"><svg viewBox="0 0 24 24"><path d="M4.500 8.500h3V20h-3zM6 3.500A1.800 1.800 0 1 1 6 7a1.800 1.800 0 0 1 0-3.500zM10 8.500h2.800v1.600c.5-.9 1.600-1.900 3.400-1.900 3.500 0 4.100 2.300 4.100 5.300V20h-3v-5.700c0-1.400 0-3.100-1.900-3.100s-2.200 1.500-2.200 3V20h-3z"/></svg></a>
-    <a id="ig" href="#" target="_blank" rel="noopener" aria-label="إنستغرام"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.500a4.500 4.500 0 1 1 0 9 4.500 4.500 0 0 1 0-9zm0 2a2.500 2.500 0 1 0 0 5 2.500 2.500 0 0 0 0-5zM17.500 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></a>
-  </div>
+  <div class="social" id="social"></div>
 
   <button class="btn qrbtn" id="payBtn">💳 وسائل الدفع الإلكتروني</button>
   <div id="payBox"></div>
@@ -114,8 +115,9 @@ const CARD = {
   email: 'e.harby2@gmail.com',
   mapUrl: 'https://maps.app.goo.gl/MwqYpw1HzUME2PeBA',
   facebook: 'https://www.facebook.com/share/19keNvXrNS/',
-  linkedin: '',
-  instagram: '',
+  linkedin: 'https://www.linkedin.com/in/mohamed-harby-abou-elmagd-588210121',
+  instagram: 'https://www.instagram.com/eng.harby',
+  tiktok: 'https://www.tiktok.com/@m.harby.1',
   cardUrl: '' /* اتركه فارغاً ليستخدم رابط الصفحة الحالي */
 };
 /* ============================ */
@@ -126,7 +128,20 @@ $('call2').href = 'tel:' + CARD.phone2;
 $('wa').href = 'https://wa.me/' + digits;
 $('map').href = CARD.mapUrl;
 $('mail').href = 'mailto:' + CARD.email;
-[['fb','facebook'],['li','linkedin'],['ig','instagram']].forEach(([id,k]) => { if (CARD[k]) $(id).href = CARD[k]; else $(id).style.display = 'none'; });
+const SOC = [
+  ['instagram', 'إنستجرام', 'Instagram', 'linear-gradient(45deg,#f9a03f,#e1306c 50%,#833ab4)', 'M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.500a4.500 4.500 0 1 1 0 9 4.500 4.500 0 0 1 0-9zm0 2a2.500 2.500 0 1 0 0 5 2.500 2.500 0 0 0 0-5zM17.500 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'],
+  ['facebook', 'فيسبوك', 'Facebook', '#1877f2', 'M14 8V6.500c0-.7.200-1.100 1.200-1.100H17V2.200C16.700 2.100 15.700 2 14.600 2 12.100 2 10.500 3.500 10.500 6.200V8H8v3.500h2.500V22H14V11.500h2.800L17.300 8z'],
+  ['linkedin', 'لينكدإن', 'LinkedIn', '#0a66c2', 'M4.500 8.500h3V20h-3zM6 3.500A1.800 1.800 0 1 1 6 7a1.800 1.800 0 0 1 0-3.500zM10 8.500h2.800v1.600c.5-.9 1.600-1.900 3.400-1.900 3.500 0 4.100 2.300 4.100 5.300V20h-3v-5.700c0-1.400 0-3.100-1.900-3.100s-2.200 1.500-2.200 3V20h-3z'],
+  ['tiktok', 'تيك توك', 'TikTok', 'linear-gradient(135deg,#25f4ee,#000 45%,#fe2c55)', 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z']
+].filter(s => CARD[s[0]]);
+SOC.forEach((s, i) => {
+  const a = document.createElement('a');
+  a.className = 'soc' + (SOC.length % 2 && i === SOC.length - 1 ? ' one' : '');
+  a.href = CARD[s[0]]; a.target = '_blank'; a.rel = 'noopener';
+  a.innerHTML = '<i style="background:' + s[3] + '"><svg viewBox="0 0 24 24"><path d="' + s[4] + '"/></svg></i><span>' + s[1] + '<small>' + s[2] + '</small></span>';
+  $('social').appendChild(a);
+});
+if (!SOC.length) $('social').style.display = 'none';
 
 /* صورة شخصية: اضغط على الدائرة لاختيار صورة */
 $('avatar').onclick = () => $('file').click();
